@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styles from './Login.module.css'
+import styles from './Auth.module.css'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth, db } from '../firebase/firebase'
 import { doc, setDoc } from 'firebase/firestore'
@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom'
 
 export const Signup = () => {
   
-  const [name, setName] = useState()
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
 
@@ -23,16 +22,12 @@ export const Signup = () => {
       const res = await createUserWithEmailAndPassword(auth, email, password)
       const user = res.user
 
-      await setDoc(doc(db, 'users', user.uid), {
-        name: name
-      })
-
       setUser({
-        name: name,
         email: email,
         uid: user.uid
       })
 
+      localStorage.setItem('uid', JSON.stringify(user.uid))
       navigate('/home')
     } catch (error) {
       alert(error.code)
@@ -46,19 +41,7 @@ export const Signup = () => {
         className={styles.formContainer}
         onSubmit={(e) => handleSubmit(e)}
       >
-        <span className={styles.fields}>
-          <label className={styles.text}>
-            Name
-          </label>
-          <input
-            className={styles.field}
-            type='text'
-            name='name'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </span>
+        <h2 style={{marginLeft: '20px'}}>Sign Up</h2>
         <span className={styles.fields}>
           <label className={styles.text}>
             email
@@ -85,6 +68,7 @@ export const Signup = () => {
             required
           />
         </span>
+        <label className={styles.textLink}>Already have an account</label>
         <button type='submit' className={styles.btn}>Submit</button>
       </form>
     </div>

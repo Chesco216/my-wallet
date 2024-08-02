@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import styles from './Login.module.css'
+import styles from './Auth.module.css'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebase/firebase'
 import { useUser } from '../Store/useUser'
@@ -25,6 +25,7 @@ export const Login = () => {
         name: user.displayName,
         email: user.email,
       })
+      localStorage.setItem('uid', JSON.stringify(user.uid))
       console.log({user})
     } catch (error) {
       alert(error.code)
@@ -39,6 +40,7 @@ export const Login = () => {
         className={styles.formContainer}
         onSubmit={(e) => handleSubmit(e)}
       >
+        <h2 style={{marginLeft: '20px'}}>Sign Up</h2>
         <span className={styles.fields}>
           <label className={styles.text}>
             email
