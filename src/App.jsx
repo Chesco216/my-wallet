@@ -6,6 +6,7 @@ import { Signup } from "./Auth/Signup"
 
 function App() {
 
+  //TODO: add protected routes, isAuth global state is already defined
   const router = createBrowserRouter([
     {
       path: '/',

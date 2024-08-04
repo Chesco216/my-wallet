@@ -4,12 +4,13 @@ import styles from './Auth.module.css'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebase/firebase'
 import { useUser } from '../Store/useUser'
+import { useAuth } from '../Store/useAuth'
 
 export const Login = () => {
 
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
-  
+  const login = useAuth(state => state.login) 
   const navigate = useNavigate()
   
   const setUser = useUser(state => state.setUser)
@@ -25,12 +26,13 @@ export const Login = () => {
         name: user.displayName,
         email: user.email,
       })
+      login()
       localStorage.setItem('uid', JSON.stringify(user.uid))
+      navigate('/home/')
       console.log({user})
     } catch (error) {
       alert(error.code)
     }
-    navigate('/home/')
   }
 
   return (

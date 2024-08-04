@@ -5,11 +5,13 @@ import { auth, db } from '../firebase/firebase'
 import { doc, setDoc } from 'firebase/firestore'
 import { useUser } from '../Store/useUser'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../Store/useAuth'
 
 export const Signup = () => {
   
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
+  const login = useAuth(state => state.login)
 
   const navigate = useNavigate()
 
@@ -21,12 +23,11 @@ export const Signup = () => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password)
       const user = res.user
-
       setUser({
         email: email,
         uid: user.uid
       })
-
+      login
       localStorage.setItem('uid', JSON.stringify(user.uid))
       navigate('/home')
     } catch (error) {

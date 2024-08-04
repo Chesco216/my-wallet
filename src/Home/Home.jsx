@@ -8,16 +8,20 @@ import { Basic } from './components/Basic/Basic.jsx'
 
 export const Home = () => {
 
+  // const { user, setUser } = useUser()
   const user = useUser(state => state.user)
+  const setUser = useUser(state => state.setUser)
 
-  const [userRef, setUserRef] = useState()
+  const [userRef, setUserRef] = useState(false)
 
-  //TODO: include localStorage to request info from firestore
+  const userID = localStorage.getItem('uid')
+
   useEffect(() => {
     try {
       getDoc(doc(db, 'users', user.uid))
-        .then(doc => setUserRef(doc.data()))
-      console.log(userRef)
+        .then(doc => setUser(doc.data()))
+      setUserRef(true)
+      // console.log(user)
     } catch (error) {
       console.log(error.code)
     }

@@ -2,19 +2,24 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './Header.module.css'
 import { useUser } from '../../../Store/useUser'
+import { useAuth } from '../../../Store/useAuth'
 
 export const Header = () => {
 
   const user = useUser(state => state.user)
   const clearUser = useUser(state => state.clear)
+  const loguot = useAuth(state => state.loguot)
 
   const navigate = useNavigate()
 
   const handleLogout = () => {
     localStorage.clear()
     clearUser()
+    loguot()
     navigate('/')
   }
+
+  console.log('user from header; ', {user})
 
   return (
     <header className={styles.container}>
