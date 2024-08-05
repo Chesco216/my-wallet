@@ -23,11 +23,7 @@ export const Signup = () => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password)
       const user = res.user
-      setUser({
-        email: email,
-        uid: user.uid
-      })
-      login
+     login
       localStorage.setItem('uid', JSON.stringify(user.uid))
       navigate('/home')
     } catch (error) {

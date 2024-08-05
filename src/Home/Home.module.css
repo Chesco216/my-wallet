@@ -2,3 +2,31 @@
   width: 100vw;
   height: 100vh;
 }
+
+.titlesContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  align-items: center;
+}
+
+.avaible {
+  color: green;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.spent {
+  color: red;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.titles {
+  font-size: 40px;
+}

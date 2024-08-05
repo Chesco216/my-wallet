@@ -13,16 +13,19 @@ export const Header = () => {
   const navigate = useNavigate()
 
   const handleLogout = () => {
+    navigate('/')
     localStorage.clear()
     clearUser()
     loguot()
-    navigate('/')
   }
 
   console.log('user from header; ', {user})
 
   return (
     <header className={styles.container}>
+      {
+        (user) && (
+          <>
       <span className={styles.info}>
         <label className={styles.text}>{user.name}</label>
         <label className={styles.income}>{user.income} $</label>
@@ -33,6 +36,9 @@ export const Header = () => {
       >
         Logout
       </button>
+      </>
+        )
+      }
     </header>
   )
 }

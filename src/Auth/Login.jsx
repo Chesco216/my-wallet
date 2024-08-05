@@ -21,11 +21,6 @@ export const Login = () => {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password)
       const user = res.user
-      setUser({
-        uid: user.uid,
-        name: user.displayName,
-        email: user.email,
-      })
       login()
       localStorage.setItem('uid', JSON.stringify(user.uid))
       navigate('/home/')
